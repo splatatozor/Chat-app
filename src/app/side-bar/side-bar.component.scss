@@ -1,0 +1,78 @@
+.Container__Img {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: black;
+}
+
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+
+
+
+
+/* SIDEBAR */
+
+.w3-sidebar {
+  width: 15vw;
+}
+
+.w3-button {
+  font-weight: bolder;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  margin: 5px 0;
+}
+
+.Container__Profile__Container__Img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0 ;
+}
+
+.Container__Profile__Img {
+  border-radius: 50%;
+  width: 100px;
+}
+
+
+.Container__Profile__Info {
+  text-align: center;
+}
+
+.Container__Profile__Info > p{
+  margin: 3px 0
+}
+
+
+.Container__Friend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Container__Friend--Img {
+  width: 50%;
+}
+
+.Container__Friend--Name {
+  font-size: 16px;
+}
