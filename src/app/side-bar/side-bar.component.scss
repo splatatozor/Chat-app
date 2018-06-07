@@ -41,6 +41,16 @@
   margin: 5px 0;
 }
 
+.Container__Profile:hover {
+  transform: scale(1.2);
+  opacity: 0.7;
+}
+
+.Container__Profile{
+  transition: all .2s ease-in-out;
+  opacity: 1;
+}
+
 .Container__Profile__Container__Img {
   display: flex;
   justify-content: center;

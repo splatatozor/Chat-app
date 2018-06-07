@@ -28,10 +28,11 @@
       <div class="Container__Friend--Name">Frozen</div>
     </div>
   </div>
-  <a href="#" class="w3-bar-item w3-button">Messages</a>
+  <a href="#" (click)="goTo(1)" class="w3-bar-item w3-button">Messages</a>
+  <a href="#" (click)="goTo(2)" class="w3-bar-item w3-button">Chat</a>
 
 
-  <div class="Container__Profile">
+  <div class="Container__Profile" (click)="goTo(3)">
     <div class="Container__Profile__Container__Img">
       <img src="../../assets/images/avatar.png" class="Container__Profile__Img" alt="Avatar">
     </div>
@@ -43,6 +44,8 @@
     <p>Homme</p>
     <p>En couple</p>
     <p>Voyage & peinture</p>
+    <a href="#" (click)="logOut()" *ngIf="toggle.isLog">Déconnexion</a>
+    <a href="#" (click)="logIn()" *ngIf="!toggle.isLog">Connexion</a>
   </div>
 </div>
 
