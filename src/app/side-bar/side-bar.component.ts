@@ -21,6 +21,11 @@ export class SideBarComponent implements OnInit {
   protected logIn() {
     this.toggle.isLog = true;
     console.log('Connect');
+    const Filter = require('bad-words'),
+          filter = new Filter();
+    filter.addWords(['merde', 'pute', 'trou']);
+
+    console.log(filter.clean('Dont be an ash0le espece de pute'));
   }
 
   protected goTo(value: Number) {
@@ -39,7 +44,9 @@ export class SideBarComponent implements OnInit {
       this.toggle.isChat = false;
       this.toggle.isProfile = true;
     }
-    return
+    return;
   }
+
+
 
 }

@@ -1,6 +1,4 @@
-app-profile {
-
-  input[type=text], select {
+ input[type=text], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -12,7 +10,7 @@ app-profile {
 
   input[type=submit] {
     width: 100%;
-    background-color: #4CAF50;
+    background-color: #39D2B4;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -22,7 +20,8 @@ app-profile {
   }
 
   input[type=submit]:hover {
-    background-color: #45a049;
+    background-color: #39D2B4;
+    opacity: 0.5;
   }
 
   div {
@@ -31,11 +30,17 @@ app-profile {
     padding: 20px;
   }
 
-  .Container__Form {
-    position: relative;
-    right: 10px;
-    bottom: 10px;
-    width: calc(100vw - 15vw - 10px - 10px - 10px);
-    margin: 20px 0 60px 16vw;
+  .Form {
+    width: calc(100vw - 16vw);
+    margin-left: 16vw;
   }
-}
+
+  .Form__Container__File {
+    display: block;
+    padding: 14px 45px;
+    background: #39D2B4;
+    color: #fff;
+    font-size: 1em;
+    transition: all .4s;
+    cursor: pointer;
+  }
