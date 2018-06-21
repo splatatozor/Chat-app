@@ -8,6 +8,7 @@ export class ToggleService {
   public isChat: Boolean = true;
   public isMessage: Boolean = false;
   public isProfile: Boolean = false;
+  public isSignIn: Boolean = false
 
   constructor() { }
 }

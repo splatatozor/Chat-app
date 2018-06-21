@@ -1,0 +1,36 @@
+<div class="Container__SignIn">
+  <div class="Form">
+    <form class="Form__Container" >
+      <label>Username</label>
+      <input type="text" [(ngModel)]="username" name="username" placeholder="Your username">
+
+      <label>Password</label>
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Your password">
+
+      <label>Full Name</label>
+      <input type="text" [(ngModel)]="fullName" name="fullname" placeholder="Your firstname and lastname..">
+
+      <label>Birthdate</label>
+      <input type="date" [(ngModel)]="birthDate" name="birthdate" placeholder="Your birthdate">
+
+      <label>Country</label>
+      <select name="country" [(ngModel)]="country">
+        <option value="2">France</option>
+      </select>
+
+      <label>Language</label>
+      <select name="language" [(ngModel)]="language">
+        <option value="1">France</option>
+      </select>
+
+
+      <label>Email</label>
+      <input type="email" [(ngModel)]="mailAddress" name="lastname" placeholder="Your last name..">
+
+      <!--<input type="file" [(ngModel)]="username" name="pic" class="Form__Container__File" accept="image/*" (change)="changeListener($event)">-->
+
+
+      <input type="submit" value="Submit" (click)="addUser()">
+    </form>
+  </div>
+</div>

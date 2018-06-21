@@ -1,33 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { ToggleService } from '../toggle.service';
+import { Component, OnInit } from "@angular/core";
+import { ToggleService } from "../toggle.service";
 declare var require: any;
 
-
 @Component({
-  selector: 'app-side-bar',
-  templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss']
+  selector: "app-side-bar",
+  templateUrl: "./side-bar.component.html",
+  styleUrls: ["./side-bar.component.scss"]
 })
 export class SideBarComponent implements OnInit {
+  constructor(public toggle: ToggleService) {}
 
-  constructor(public toggle: ToggleService) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   protected logOut() {
     this.toggle.isLog = false;
-    console.log('Disconnect');
+    console.log("Disconnect");
   }
 
   protected logIn() {
     this.toggle.isLog = true;
-    console.log('Connect');
+    console.log("Connect");
 
-      const Filter = require('bad-words'),
-          filter = new Filter();
-      filter.addWords(['merde', 'pute', 'trou']);
-      console.log(filter.clean('Dont be an ash0le espece de pute'));
+    const Filter = require("bad-words"),
+      filter = new Filter();
+    filter.addWords(["merde", "pute", "trou"]);
+    console.log(filter.clean("Dont be an ash0le espece de pute"));
+  }
+
+  protected signIn() {
+    console.log("incription");
+    this.goTo(4);
   }
 
   protected goTo(value: Number) {
@@ -35,20 +37,26 @@ export class SideBarComponent implements OnInit {
       this.toggle.isMessage = true;
       this.toggle.isChat = false;
       this.toggle.isProfile = false;
+      this.toggle.isSignIn = false;
     }
     if (value === 2) {
       this.toggle.isMessage = false;
       this.toggle.isChat = true;
       this.toggle.isProfile = false;
+      this.toggle.isSignIn = false;
     }
     if (value === 3) {
       this.toggle.isMessage = false;
       this.toggle.isChat = false;
       this.toggle.isProfile = true;
+      this.toggle.isSignIn = false;
+    }
+    if (value === 4) {
+      this.toggle.isMessage = false;
+      this.toggle.isChat = false;
+      this.toggle.isProfile = false;
+      this.toggle.isSignIn = true;
     }
     return;
   }
-
-
-
 }
