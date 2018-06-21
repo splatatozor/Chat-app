@@ -1,0 +1,13 @@
+<div class="Container__Login">
+  <div class="Form">
+    <form class="Form__Container" >
+      <label>Username</label>
+      <input type="text" [(ngModel)]="username" name="username" placeholder="Your username">
+
+      <label>Password</label>
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Your password">
+
+      <input type="submit" value="Submit" (click)="login()">
+    </form>
+  </div>
+</div>

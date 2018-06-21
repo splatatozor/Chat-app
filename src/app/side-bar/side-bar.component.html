@@ -38,15 +38,12 @@
     </div>
   </div>
   <div class="Container__Profile__Info">
-    <p>Samuel Kabbaj</p>
-    <p>24 Ans</p>
-    <p>Smile OpenSource</p>
-    <p>Homme</p>
-    <p>En couple</p>
-    <p>Voyage & peinture</p>
+    <!--<p>{{user.username}}</p>-->
+    <!--<p>{{user.fullName}}</p>-->
+    <!--<p>{{user.mailAddress}}</p>-->
     <a href="#" (click)="logOut()" *ngIf="toggle.isLog">Déconnexion</a>
-    <a href="#" (click)="logIn()" *ngIf="!toggle.isLog">Connexion</a>
-    <p><a href="#" (click)="signIn()" *ngIf="!toggle.isLog">Inscription</a></p>
+    <a href="#" (click)="goTo(5)" *ngIf="!toggle.isLog">Connexion</a>
+    <p><a href="#" (click)="goTo(4)" *ngIf="!toggle.isLog">Inscription</a></p>
   </div>
 </div>
 

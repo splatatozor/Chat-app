@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import {Observable} from 'rxjs';
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -27,5 +27,22 @@ export class ApiService {
       language: language,
       mailAddress: mailAddress
     });
+  }
+
+  public login(username: String, password: String): Observable<Object> {
+    return this.http.post(this.url + "user/connection", {
+      username: username,
+      password: password
+    });
+  }
+
+  public logOut(token: String) {
+      return this.http.post(this.url + "user/disconnection", {
+          token: token
+      });
+  }
+
+  public getMe(token): Observable<Object> {
+      return this.http.get(this.url + "user/me?token=" + token);
   }
 }

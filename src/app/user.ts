@@ -6,4 +6,5 @@ export class User {
     public country: Number;
     public language: Number;
     public mailAddress: String;
+
 }

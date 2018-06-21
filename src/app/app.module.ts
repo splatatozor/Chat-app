@@ -8,6 +8,7 @@ import { ChatComponent } from "./chat/chat.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { SignInComponent } from "./sign-in/sign-in.component";
 import { HttpClientModule } from "@angular/common/http";
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HttpClientModule } from "@angular/common/http";
     SideBarComponent,
     ChatComponent,
     ProfileComponent,
-    SignInComponent
+    SignInComponent,
+    LoginComponent
   ],
   imports: [BrowserModule, HttpClientModule, FormsModule],
   providers: [],

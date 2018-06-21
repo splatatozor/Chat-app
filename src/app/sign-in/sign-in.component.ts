@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from "../user";
 import { ApiService } from "../api.service";
+import {ToggleService} from "../toggle.service";
 
 @Component({
   selector: "app-sign-in",
@@ -15,7 +16,7 @@ export class SignInComponent implements OnInit {
   protected country: Number;
   protected language: Number;
   protected mailAddress: String;
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private toggle: ToggleService) {}
 
   ngOnInit() {}
 
@@ -35,6 +36,8 @@ export class SignInComponent implements OnInit {
       )
       .subscribe(res => {
         console.log(res);
+          this.toggle.isSignIn = false;
+          this.toggle.isLogin = true;
       });
   }
 }
