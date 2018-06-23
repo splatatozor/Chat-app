@@ -1,14 +1,14 @@
-<div class="Form">
-  <form action="#" class="Form__Container">
-    <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-    <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-
-    <input type="file" name="pic" class="Form__Container__File" accept="image/*" (change)="changeListener($event)">
-
-
-    <input type="submit" value="Submit">
-  </form>
+<div>
+  <div class="card">
+    <img src="../../assets/images/avatar2.png" alt="John" style="width:100%">
+    <h1>{{username}}</h1>
+    <h3>{{fullName}}</h3>
+    <p class="title">{{birthDate}}</p>
+    <p>{{country}}</p>
+    <a href="#"><i class="fa fa-dribbble"></i></a>
+    <a href="#"><i class="fa fa-twitter"></i></a>
+    <a href="#"><i class="fa fa-linkedin"></i></a>
+    <a href="#"><i class="fa fa-facebook"></i></a>
+    <p><button (click)="sendEmail()">Contact</button></p>
+  </div>
 </div>

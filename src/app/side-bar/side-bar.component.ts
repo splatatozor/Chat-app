@@ -11,7 +11,6 @@ declare var require: any;
 })
 export class SideBarComponent implements OnInit {
 
-  public user: User
   constructor(public toggle: ToggleService, private api: ApiService) {}
 
   ngOnInit() {}
@@ -42,37 +41,37 @@ export class SideBarComponent implements OnInit {
 
   protected goTo(value: Number) {
     if (value === 1) {
-      this.toggle.isMessage = true;
+      this.toggle.isProfile = true;
       this.toggle.isChat = false;
-      this.toggle.isProfile = false;
+      this.toggle.isEditProfile = false;
       this.toggle.isSignIn = false;
       this.toggle.isLogin = false;
     }
     if (value === 2) {
-      this.toggle.isMessage = false;
-      this.toggle.isChat = true;
       this.toggle.isProfile = false;
+      this.toggle.isChat = true;
+      this.toggle.isEditProfile = false;
       this.toggle.isSignIn = false;
       this.toggle.isLogin = false;
     }
     if (value === 3) {
-      this.toggle.isMessage = false;
+      this.toggle.isProfile = false;
       this.toggle.isChat = false;
-      this.toggle.isProfile = true;
+      this.toggle.isEditProfile = true;
       this.toggle.isSignIn = false;
       this.toggle.isLogin = false;
     }
     if (value === 4) {
-      this.toggle.isMessage = false;
-      this.toggle.isChat = false;
       this.toggle.isProfile = false;
+      this.toggle.isChat = false;
+      this.toggle.isEditProfile = false;
       this.toggle.isSignIn = true;
       this.toggle.isLogin = false;
     }
     if (value === 5) {
-      this.toggle.isMessage = false;
-      this.toggle.isChat = false;
       this.toggle.isProfile = false;
+      this.toggle.isChat = false;
+      this.toggle.isEditProfile = false;
       this.toggle.isSignIn = false;
       this.toggle.isLogin = true;
     }

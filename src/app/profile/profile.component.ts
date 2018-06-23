@@ -1,36 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { ApiService } from "../api.service";
+import { ToggleService } from "../toggle.service";
+import { User } from "../user";
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: "app-profile",
+  templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.scss"]
 })
 export class ProfileComponent implements OnInit {
-  image: any
-  constructor() {
+  protected username: String;
+  protected fullName: String;
+  protected birthDate: String;
+  protected country: Number;
+  protected mailAddress: String;
+
+  constructor(private api: ApiService, private toggle: ToggleService) {}
+
+  ngOnInit() {
+    this.getMet();
   }
 
-  ngOnInit() {}
-
-  protected onChange(event) {
-    console.log(event);
-
+  protected sendEmail(): void {
+    window.open("mailto:" + this.mailAddress);
   }
 
-  protected changeListener($event): void {
-    this.getBase64($event.target.files[0
-      ]);
+  protected getMet(): void {
+    this.api.getMe(this.toggle.token).subscribe(
+      res => {
+        console.log(res);
+        this.username = res["username"];
+        this.fullName = res["fullName"];
+        this.birthDate = res["birthDate"];
+        this.country = res["country"];
+        this.mailAddress = res["mailAddress"];
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    let birthday = this.birthDate.split("T")
+      console.log(birthday)
   }
-
-  private getBase64(file) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      console.log(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log('Error: ', error);
-    };
-  }
-
 }
