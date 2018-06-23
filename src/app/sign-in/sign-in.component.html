@@ -27,7 +27,7 @@
       <label>Email</label>
       <input type="email" [(ngModel)]="mailAddress" name="lastname" placeholder="Your last name..">
 
-      <!--<input type="file" [(ngModel)]="username" name="pic" class="Form__Container__File" accept="image/*" (change)="changeListener($event)">-->
+      <input type="file" [(ngModel)]="picture" name="pic" class="Form__Container__File" accept=".png, .jpg, .jpeg" size="2097152">
 
 
       <input type="submit" value="Submit" (click)="addUser()">

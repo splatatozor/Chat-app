@@ -39,7 +39,5 @@ export class ProfileComponent implements OnInit {
         console.log(error);
       }
     );
-    let birthday = this.birthDate.split("T")
-      console.log(birthday)
   }
 }

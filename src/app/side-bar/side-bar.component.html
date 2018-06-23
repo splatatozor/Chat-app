@@ -3,9 +3,9 @@
   <div class="Container__Img">
     <img src="../../assets/images/chat_logo.png">
   </div>
-  <a class="w3-bar-item w3-button">Amis</a>
-  <a (click)="goTo(2)" class="w3-bar-item w3-button">Chat</a>
-  <a (click)="goTo(1)" class="w3-bar-item w3-button">Mon profil</a>
+  <a class="w3-bar-item w3-button" *ngIf="toggle.isLog">Amis</a>
+  <a (click)="goTo(2)" class="w3-bar-item w3-button" *ngIf="toggle.isLog">Chat</a>
+  <a (click)="goTo(1)" class="w3-bar-item w3-button" *ngIf="toggle.isLog">Mon profil</a>
   <a class="w3-bar-item w3-button" (click)="logOut()" *ngIf="toggle.isLog">Déconnexion</a>
   <a class="w3-bar-item w3-button" (click)="goTo(5)" *ngIf="!toggle.isLog">Connexion</a>
   <p><a class="w3-bar-item w3-button" (click)="goTo(4)" *ngIf="!toggle.isLog">Inscription</a></p>
