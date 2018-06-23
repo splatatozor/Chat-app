@@ -3,47 +3,47 @@
   <div class="Container__Img">
     <img src="../../assets/images/chat_logo.png">
   </div>
-  <a href="#" class="w3-bar-item w3-button">Amis</a>
-  <div class="Container__Friend">
-    <div class="w3-cell" style="width:30%">
-      <img src="../../assets/images/avatar2.png" class="Container__Friend--Img">
-    </div>
-    <div class="w3-cell w3-container">
-      <div class="Container__Friend--Name">Frozen</div>
-    </div>
-  </div>
-  <div class="Container__Friend">
-    <div class="w3-cell" style="width:30%">
-      <img src="../../assets/images/avatar2.png" class="Container__Friend--Img">
-    </div>
-    <div class="w3-cell w3-container">
-      <div class="Container__Friend--Name">Frozen</div>
-    </div>
-  </div>
-  <div class="Container__Friend">
-    <div class="w3-cell" style="width:30%">
-      <img src="../../assets/images/avatar2.png" class="Container__Friend--Img">
-    </div>
-    <div class="w3-cell w3-container">
-      <div class="Container__Friend--Name">Frozen</div>
-    </div>
-  </div>
-  <a href="#" (click)="goTo(1)" class="w3-bar-item w3-button">Messages</a>
-  <a href="#" (click)="goTo(2)" class="w3-bar-item w3-button">Chat</a>
+  <a class="w3-bar-item w3-button">Amis</a>
+  <!--<div class="Container__Friend">-->
+    <!--<div class="w3-cell" style="width:30%">-->
+      <!--<img src="../../assets/images/avatar2.png" class="Container__Friend&#45;&#45;Img">-->
+    <!--</div>-->
+    <!--<div class="w3-cell w3-container">-->
+      <!--<div class="Container__Friend&#45;&#45;Name">Frozen</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="Container__Friend">-->
+    <!--<div class="w3-cell" style="width:30%">-->
+      <!--<img src="../../assets/images/avatar2.png" class="Container__Friend&#45;&#45;Img">-->
+    <!--</div>-->
+    <!--<div class="w3-cell w3-container">-->
+      <!--<div class="Container__Friend&#45;&#45;Name">Frozen</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="Container__Friend">-->
+    <!--<div class="w3-cell" style="width:30%">-->
+      <!--<img src="../../assets/images/avatar2.png" class="Container__Friend&#45;&#45;Img">-->
+    <!--</div>-->
+    <!--<div class="w3-cell w3-container">-->
+      <!--<div class="Container__Friend&#45;&#45;Name">Frozen</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <a (click)="goTo(1)" class="w3-bar-item w3-button">Messages</a>
+  <a (click)="goTo(2)" class="w3-bar-item w3-button">Chat</a>
 
 
-  <div class="Container__Profile" (click)="goTo(3)">
-    <div class="Container__Profile__Container__Img">
-      <img src="../../assets/images/avatar.png" class="Container__Profile__Img" alt="Avatar">
-    </div>
-  </div>
+  <!--<div class="Container__Profile" (click)="goTo(3)">-->
+    <!--<div class="Container__Profile__Container__Img">-->
+      <!--<img src="../../assets/images/avatar.png" class="Container__Profile__Img" alt="Avatar">-->
+    <!--</div>-->
+  <!--</div>-->
   <div class="Container__Profile__Info">
     <!--<p>{{user.username}}</p>-->
     <!--<p>{{user.fullName}}</p>-->
     <!--<p>{{user.mailAddress}}</p>-->
-    <a href="#" (click)="logOut()" *ngIf="toggle.isLog">Déconnexion</a>
-    <a href="#" (click)="goTo(5)" *ngIf="!toggle.isLog">Connexion</a>
-    <p><a href="#" (click)="goTo(4)" *ngIf="!toggle.isLog">Inscription</a></p>
   </div>
+  <a class="w3-bar-item w3-button" (click)="logOut()" *ngIf="toggle.isLog">Déconnexion</a>
+  <a class="w3-bar-item w3-button" (click)="goTo(5)" *ngIf="!toggle.isLog">Connexion</a>
+  <p><a class="w3-bar-item w3-button" (click)="goTo(4)" *ngIf="!toggle.isLog">Inscription</a></p>
 </div>
 
