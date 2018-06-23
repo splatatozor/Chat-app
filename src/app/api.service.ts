@@ -37,12 +37,20 @@ export class ApiService {
   }
 
   public logOut(token: String) {
-      return this.http.post(this.url + "user/disconnection", {
-          token: token
-      });
+    return this.http.post(this.url + "user/disconnection", {
+      token: token
+    });
   }
 
   public getMe(token): Observable<Object> {
-      return this.http.get(this.url + "user/me?token=" + token);
+    return this.http.get(this.url + "user/me?token=" + token);
+  }
+
+  public getLanguages(): Observable<Object> {
+    return this.http.get(this.url + "language");
+  }
+
+  public getCountries(): Observable<Object> {
+    return this.http.get(this.url + "language");
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from "../user";
 import { ApiService } from "../api.service";
-import {ToggleService} from "../toggle.service";
+import { ToggleService } from "../toggle.service";
 
 @Component({
   selector: "app-sign-in",
@@ -16,14 +16,18 @@ export class SignInComponent implements OnInit {
   protected country: Number;
   protected language: Number;
   protected mailAddress: String;
+  protected languages: any;
+  protected countries: any;
   constructor(private api: ApiService, private toggle: ToggleService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getCountries();
+    this.getLanguages();
+  }
 
-  addUser() {
-    const birthDateTimeStamp: Number =
-      new Date(this.birthDate).getTime();
-    console.log(birthDateTimeStamp)
+  protected addUser() {
+    const birthDateTimeStamp: Number = new Date(this.birthDate).getTime();
+    console.log(this.country);
     this.api
       .addUser(
         this.username,
@@ -36,8 +40,32 @@ export class SignInComponent implements OnInit {
       )
       .subscribe(res => {
         console.log(res);
-          this.toggle.isSignIn = false;
-          this.toggle.isLogin = true;
+        this.toggle.isSignIn = false;
+        this.toggle.isLogin = true;
       });
+  }
+
+  private getLanguages() {
+    this.api.getLanguages().subscribe(
+      res => {
+        console.log(res);
+        this.languages = res;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  private getCountries() {
+    this.api.getCountries().subscribe(
+      res => {
+        console.log(res);
+        this.countries = res;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

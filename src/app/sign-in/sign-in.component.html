@@ -15,12 +15,12 @@
 
       <label>Country</label>
       <select name="country" [(ngModel)]="country">
-        <option value="2">France</option>
+        <option *ngFor="let country of countries" value={{country.id}}>{{country.label}}</option>
       </select>
 
       <label>Language</label>
       <select name="language" [(ngModel)]="language">
-        <option value="1">France</option>
+        <option *ngFor="let language of languages" value={{language.id}}>{{ language.label }}</option>
       </select>
 
 
