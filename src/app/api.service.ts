@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -52,5 +52,22 @@ export class ApiService {
 
   public getCountries(): Observable<Object> {
     return this.http.get(this.url + "language");
+  }
+
+  public changeProfilePicture(avatar, token): Observable<Object> {
+      let headers = new Headers();
+      headers.append('Content-Type',"application/x-www-form-urlencoded");
+
+
+      console.log(avatar);
+    const uploadData = new FormData();
+    uploadData.append("data", avatar, avatar.name);
+    console.log(uploadData.getAll("img"));
+
+    return this.http.put(this.url + "user/avatar", {
+      headers: headers,
+      img: uploadData,
+      token: token,
+    });
   }
 }

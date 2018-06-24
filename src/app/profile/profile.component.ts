@@ -14,18 +14,19 @@ export class ProfileComponent implements OnInit {
   protected birthDate: String;
   protected country: Number;
   protected mailAddress: String;
+  protected avatar: any;
 
   constructor(private api: ApiService, private toggle: ToggleService) {}
 
   ngOnInit() {
-    this.getMet();
+    this.getMe();
   }
 
   protected sendEmail(): void {
     window.open("mailto:" + this.mailAddress);
   }
 
-  protected getMet(): void {
+  protected getMe(): void {
     this.api.getMe(this.toggle.token).subscribe(
       res => {
         console.log(res);
@@ -34,10 +35,25 @@ export class ProfileComponent implements OnInit {
         this.birthDate = res["birthDate"];
         this.country = res["country"];
         this.mailAddress = res["mailAddress"];
+        this.avatar = res["avatarUrl"];
       },
       error => {
         console.log(error);
       }
     );
+  }
+
+  private uploadImg(avatarToUpload) {
+    this.api.changeProfilePicture(avatarToUpload, this.toggle.token).subscribe(res => {
+      this.getMe()
+        console.log("Ok ")
+    },error => {
+        console.log(error)
+    });
+  }
+
+  protected changeListener($event): void {
+    let avatarToUpload = $event.target.files[0];
+    this.uploadImg(avatarToUpload)
   }
 }

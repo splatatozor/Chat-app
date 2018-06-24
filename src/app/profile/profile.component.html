@@ -1,6 +1,21 @@
 <div>
   <div class="card">
-    <img src="../../assets/images/man.png" alt="{{username}}" class="Img" style="width:100%">
+    <div class="Container__Picture">
+      <img src="../../assets/images/man.png"
+           alt="{{username}}"
+           class="Img"
+           *ngIf="!avatar">
+      <img src="{{avatar}}"
+           alt="{{username}}"
+           class="Img"
+           *ngIf="avatar">
+      <div class="image-upload">
+        <label for="file-input">
+          <img src="http://goo.gl/pB9rpQ"/>
+        </label>
+          <input (change)="changeListener($event)" id="file-input" type="file"/>
+      </div>
+    </div>
     <h1>{{username}}</h1>
     <h3>{{fullName}}</h3>
     <p class="title">{{birthDate}}</p>
