@@ -14,6 +14,8 @@ export class ProfileComponent implements OnInit {
   protected country: Number;
   protected mailAddress: String;
   protected avatar: String;
+  protected errorSize: Boolean = false;
+  protected errorType: Boolean = false;
 
   constructor(private api: ApiService, private toggle: ToggleService) {
     this.avatar = this.api.url + "user/avatar/" + this.username;
@@ -49,9 +51,19 @@ export class ProfileComponent implements OnInit {
   }
 
   private uploadImg(avatarToUpload) {
+    this.errorSize = false;
+    this.errorType = false;
     this.api.changeProfilePicture(avatarToUpload, this.toggle.token).subscribe(
       res => {
-        this.getMe();
+        if (res["success"] === false && res["errCode"] === "size") {
+          this.errorSize = true;
+        }
+        if (res["success"] === false && res["errCode"] === "type") {
+          this.errorType = true;
+        }
+        if (res["success"] === true) {
+          this.getMe();
+        }
       },
       error => {
         console.log(error);
@@ -79,8 +91,8 @@ export class ProfileComponent implements OnInit {
     this.api.deleteAccount(this.toggle.token).subscribe(res => {
       console.log("ok");
       this.toggle.isLog = false;
-      this.toggle.isProfile = false
-        this.toggle.isLogin = true
+      this.toggle.isProfile = false;
+      this.toggle.isLogin = true;
       localStorage.removeItem("token");
     });
   }

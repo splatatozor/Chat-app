@@ -28,5 +28,12 @@
     <div class="Delete" (click)="deleteAccount()">
         Supprimer mon compte
     </div>
+
+    <div class="Error" *ngIf="errorSize">
+      L'image est trop grosse, Elle doit etre inférieur à 2Mo.
+    </div>
+    <div class="Error" *ngIf="errorType">
+      L'image doit etre de type jpg, jpeg, png ou gif.
+    </div>
   </div>
 </div>

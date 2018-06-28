@@ -9,6 +9,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { SignInComponent } from "./sign-in/sign-in.component";
 import { HttpClientModule } from "@angular/common/http";
 import { LoginComponent } from './login/login.component';
+import {WebSocketService} from "./web-socket.service";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { LoginComponent } from './login/login.component';
     LoginComponent
   ],
   imports: [BrowserModule, HttpClientModule, FormsModule],
-  providers: [],
+  providers: [WebSocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,40 +1,31 @@
 import { Injectable } from '@angular/core';
-import * as Rx from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
-@Injectable({
-  providedIn: 'root'
-})
+import * as socketIo from 'socket.io-client';
+
+const SERVER_URL = 'http://localhost:8080';
+
+@Injectable()
 export class WebSocketService {
+    private socket;
 
-  constructor() { }
-
-    private subject: Rx.Subject<MessageEvent>;
-
-    public connect(url): Rx.Subject<MessageEvent> {
-        if (!this.subject) {
-            this.subject = this.create(url);
-            console.log("Successfully connected: " + url);
-        }
-        return this.subject;
+    public initSocket(): void {
+        this.socket = socketIo(SERVER_URL);
     }
 
-    private create(url): Rx.Subject<MessageEvent> {
-        let ws = new WebSocket(url);
+    public send(message: String): void {
+        this.socket.emit('message', message);
+    }
 
-        let observable = Rx.Observable.create(
-            (obs: Rx.Observer<MessageEvent>) => {
-                ws.onmessage = obs.next.bind(obs);
-                ws.onerror = obs.error.bind(obs);
-                ws.onclose = obs.complete.bind(obs);
-                return ws.close.bind(ws);
-            })
-        let observer = {
-            next: (data: Object) => {
-                if (ws.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify(data));
-                }
-            }
-        }
-        return Rx.Subject.create(observer, observable);
+    public onMessage(): Observable<String> {
+        return new Observable<String>(observer => {
+            this.socket.on('stayAwake', (data: String) => observer.next(data));
+        });
+    }
+
+    public onEvent(event: Event): Observable<any> {
+        return new Observable<Event>(observer => {
+            this.socket.on(event, () => observer.next());
+        });
     }
 }

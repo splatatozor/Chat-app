@@ -52,7 +52,7 @@ export class SideBarComponent implements OnInit {
       this.toggle.isEditProfile = false;
       this.toggle.isSignIn = false;
       this.toggle.isLogin = false;
-      this.badWords.checkbadWords("je suis une petite pute");
+      this.badWords.checkbadWords("nique ta mère");
     }
     if (value === 3) {
       this.toggle.isProfile = false;
