@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -59,5 +59,11 @@ export class ApiService {
     uploadData.append("img", avatar, avatar.name);
     uploadData.append("token", token);
     return this.http.put(this.url + "user/avatar", uploadData);
+  }
+
+  public deleteAccount(token): Observable<Object> {
+    return this.http.post(this.url + "user/delete", {
+      token: token
+    })
   }
 }

@@ -54,5 +54,21 @@ a:hover {
   position: absolute;
   right: 0;
   top: 0;
+}
 
+.Delete {
+  height: 50px;
+  color: red;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  font-weight: bolder;
+}
+
+.Delete:hover {
+  color: white;
+  background-color: red;
 }

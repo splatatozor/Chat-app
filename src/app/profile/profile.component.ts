@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ApiService } from "../api.service";
 import { ToggleService } from "../toggle.service";
-import { User } from "../user";
 
 @Component({
   selector: "app-profile",
@@ -17,7 +16,7 @@ export class ProfileComponent implements OnInit {
   protected avatar: String;
 
   constructor(private api: ApiService, private toggle: ToggleService) {
-    this.avatar = this.api.url + "user/avatar/" + this.username
+    this.avatar = this.api.url + "user/avatar/" + this.username;
   }
 
   ngOnInit() {
@@ -36,7 +35,12 @@ export class ProfileComponent implements OnInit {
         this.birthDate = res["birthDate"];
         this.country = res["country"];
         this.mailAddress = res["mailAddress"];
-        this.avatar = this.api.url + "user/avatar/" + res["username"]+ "?time=" + Date.now();
+        this.avatar =
+          this.api.url +
+          "user/avatar/" +
+          res["username"] +
+          "?time=" +
+          Date.now();
       },
       error => {
         console.log(error);
@@ -61,13 +65,21 @@ export class ProfileComponent implements OnInit {
   }
 
   protected getAvatar(): String {
-    return this.avatar
+    return this.avatar;
   }
 
   protected getBirthdate() {
     if (this.birthDate == undefined) {
-      return
+      return;
     }
-    return this.birthDate.slice(0,10)
+    return this.birthDate.slice(0, 10);
+  }
+
+  protected deleteAccount() {
+    this.api.deleteAccount(this.toggle.token).subscribe(res => {
+      console.log("ok");
+      this.toggle.isLog = false;
+      localStorage.removeItem("token");
+    });
   }
 }
