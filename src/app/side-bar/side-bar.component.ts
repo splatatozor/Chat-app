@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ToggleService } from "../toggle.service";
-import {ApiService} from "../api.service";
-import {User} from "../user";
+import { ApiService } from "../api.service";
+import { User } from "../user";
+import { BadWordsService } from "../bad-words.service";
 declare var require: any;
 
 @Component({
@@ -10,29 +11,27 @@ declare var require: any;
   styleUrls: ["./side-bar.component.scss"]
 })
 export class SideBarComponent implements OnInit {
-
-  constructor(public toggle: ToggleService, private api: ApiService) {}
+  constructor(
+    public toggle: ToggleService,
+    private api: ApiService,
+    private badWords: BadWordsService
+  ) {}
 
   ngOnInit() {}
 
   protected logOut() {
-    let token = localStorage.getItem("token")
-      if (token !== null) {
-          this.api.logOut(token).subscribe(res => {
-              this.toggle.isLog = false;
-              localStorage.removeItem("token")
-          })
-      }
+    let token = localStorage.getItem("token");
+    if (token !== null) {
+      this.api.logOut(token).subscribe(res => {
+        this.toggle.isLog = false;
+        localStorage.removeItem("token");
+      });
+    }
   }
 
   protected logIn() {
     this.toggle.isLog = true;
     console.log("Connect");
-
-    const Filter = require("bad-words"),
-      filter = new Filter();
-    filter.addWords(["merde", "pute", "trou"]);
-    console.log(filter.clean("Dont be an ash0le espece de pute"));
   }
 
   protected signIn() {
@@ -53,6 +52,7 @@ export class SideBarComponent implements OnInit {
       this.toggle.isEditProfile = false;
       this.toggle.isSignIn = false;
       this.toggle.isLogin = false;
+      this.badWords.checkbadWords("je suis une petite pute");
     }
     if (value === 3) {
       this.toggle.isProfile = false;

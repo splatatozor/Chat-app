@@ -3,7 +3,6 @@ import {ToggleService} from './toggle.service';
 import {ApiService} from "./api.service";
 import {User} from "./user";
 import { Observable, Subject } from 'rxjs/Rx';
-import { WebsocketService } from './websocket.service';
 
 const SOCKET_URL = 'ws://127.0.0.1:3000/';
 
