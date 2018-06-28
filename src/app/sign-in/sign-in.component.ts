@@ -18,7 +18,6 @@ export class SignInComponent implements OnInit {
   protected mailAddress: String;
   protected languages: any;
   protected countries: any;
-  protected picture: any
   constructor(private api: ApiService, private toggle: ToggleService) {}
 
   ngOnInit() {

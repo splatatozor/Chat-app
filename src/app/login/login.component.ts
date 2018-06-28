@@ -1,28 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import {ApiService} from "../api.service";
-import {ToggleService} from "../toggle.service";
-import {User} from "../user";
+import { Component, OnInit } from "@angular/core";
+import { ApiService } from "../api.service";
+import { ToggleService } from "../toggle.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
   protected username: String;
   protected password: String;
-  constructor(private api: ApiService, private toggle: ToggleService) { }
+  protected errorDeleted: boolean = false;
+  protected errorCredentials: boolean = false;
+  protected errorUnexpected: boolean = false;
+  constructor(private api: ApiService, private toggle: ToggleService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   protected login() {
+    this.errorCredentials = false;
+    this.errorUnexpected = false;
+    this.errorDeleted = false;
     this.api.login(this.username, this.password).subscribe(res => {
-      localStorage.setItem("token", res["token"]);
+      if (res["success"] === false && res["errCode"] === "deleted") {
+        this.errorDeleted = true;
+      }
+      if (res["success"] === false && res["errCode"] === "credentials") {
+        this.errorCredentials = true;
+      }
+      if (res["success"] === false && res["errCode"] === "unexpected") {
+        this.errorUnexpected = true;
+      }
+      if (res["success"] === true) {
+        localStorage.setItem("token", res["token"]);
         this.toggle.isLogin = false;
         this.toggle.isChat = true;
         this.toggle.isLog = true;
-        this.toggle.token = res["token"]
-    })
+        this.toggle.token = res["token"];
+      }
+    });
   }
 }

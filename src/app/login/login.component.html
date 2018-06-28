@@ -9,5 +9,14 @@
 
       <input type="submit" value="Submit" (click)="login()">
     </form>
+    <div *ngIf="errorCredentials" class="Error">
+      Vous ne pouvez pas vous connecter, votre username ou mot de passe est incorrect.
+    </div>
+    <div *ngIf="errorDeleted" class="Error">
+      Vous ne pouvez pas vous connecter, vous avez supprimé votre compte.
+    </div>
+    <div *ngIf="errorUnexpected" class="Error">
+      Une erreur est survenue, merci d'essayer plus tard.
+    </div>
   </div>
 </div>

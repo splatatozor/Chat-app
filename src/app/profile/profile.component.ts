@@ -79,6 +79,8 @@ export class ProfileComponent implements OnInit {
     this.api.deleteAccount(this.toggle.token).subscribe(res => {
       console.log("ok");
       this.toggle.isLog = false;
+      this.toggle.isProfile = false
+        this.toggle.isLogin = true
       localStorage.removeItem("token");
     });
   }
