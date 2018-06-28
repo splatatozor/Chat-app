@@ -28,7 +28,6 @@ export class SignInComponent implements OnInit {
 
   protected addUser() {
     const birthDateTimeStamp: Number = new Date(this.birthDate).getTime();
-    console.log(this.country);
     this.api
       .addUser(
         this.username,
@@ -49,7 +48,6 @@ export class SignInComponent implements OnInit {
   private getLanguages() {
     this.api.getLanguages().subscribe(
       res => {
-        console.log(res);
         this.languages = res;
       },
       error => {
@@ -61,7 +59,6 @@ export class SignInComponent implements OnInit {
   private getCountries() {
     this.api.getCountries().subscribe(
       res => {
-        console.log(res);
         this.countries = res;
       },
       error => {

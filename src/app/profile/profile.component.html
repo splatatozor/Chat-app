@@ -5,7 +5,7 @@
            alt="{{username}}"
            class="Img"
            *ngIf="!avatar">
-      <img src="{{avatar}}"
+      <img [src]="getAvatar()"
            alt="{{username}}"
            class="Img"
            *ngIf="avatar">
@@ -18,7 +18,7 @@
     </div>
     <h1>{{username}}</h1>
     <h3>{{fullName}}</h3>
-    <p class="title">{{birthDate}}</p>
+    <p class="title">{{getBirthdate()}}</p>
     <p>{{country}}</p>
     <a href="#"><i class="fa fa-dribbble"></i></a>
     <a href="#"><i class="fa fa-twitter"></i></a>

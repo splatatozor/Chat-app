@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class ApiService {
-  private readonly url: string = "http://127.0.0.1:3000/";
+  public readonly url: string = "http://127.0.0.1:3000/";
   constructor(private http: HttpClient) {}
 
   public addUser(
@@ -55,19 +55,9 @@ export class ApiService {
   }
 
   public changeProfilePicture(avatar, token): Observable<Object> {
-      let headers = new Headers();
-      headers.append('Content-Type',"application/x-www-form-urlencoded");
-
-
-      console.log(avatar);
     const uploadData = new FormData();
-    uploadData.append("data", avatar, avatar.name);
-    console.log(uploadData.getAll("img"));
-
-    return this.http.put(this.url + "user/avatar", {
-      headers: headers,
-      img: uploadData,
-      token: token,
-    });
+    uploadData.append("img", avatar, avatar.name);
+    uploadData.append("token", token);
+    return this.http.put(this.url + "user/avatar", uploadData);
   }
 }

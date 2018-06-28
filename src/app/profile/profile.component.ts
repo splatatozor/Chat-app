@@ -14,9 +14,11 @@ export class ProfileComponent implements OnInit {
   protected birthDate: String;
   protected country: Number;
   protected mailAddress: String;
-  protected avatar: any;
+  protected avatar: String;
 
-  constructor(private api: ApiService, private toggle: ToggleService) {}
+  constructor(private api: ApiService, private toggle: ToggleService) {
+    this.avatar = this.api.url + "user/avatar/" + this.username
+  }
 
   ngOnInit() {
     this.getMe();
@@ -29,13 +31,12 @@ export class ProfileComponent implements OnInit {
   protected getMe(): void {
     this.api.getMe(this.toggle.token).subscribe(
       res => {
-        console.log(res);
         this.username = res["username"];
         this.fullName = res["fullName"];
         this.birthDate = res["birthDate"];
         this.country = res["country"];
         this.mailAddress = res["mailAddress"];
-        this.avatar = res["avatarUrl"];
+        this.avatar = this.api.url + "user/avatar/" + res["username"]+ "?time=" + Date.now();
       },
       error => {
         console.log(error);
@@ -44,16 +45,29 @@ export class ProfileComponent implements OnInit {
   }
 
   private uploadImg(avatarToUpload) {
-    this.api.changeProfilePicture(avatarToUpload, this.toggle.token).subscribe(res => {
-      this.getMe()
-        console.log("Ok ")
-    },error => {
-        console.log(error)
-    });
+    this.api.changeProfilePicture(avatarToUpload, this.toggle.token).subscribe(
+      res => {
+        this.getMe();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   protected changeListener($event): void {
     let avatarToUpload = $event.target.files[0];
-    this.uploadImg(avatarToUpload)
+    this.uploadImg(avatarToUpload);
+  }
+
+  protected getAvatar(): String {
+    return this.avatar
+  }
+
+  protected getBirthdate() {
+    if (this.birthDate == undefined) {
+      return
+    }
+    return this.birthDate.slice(0,10)
   }
 }
