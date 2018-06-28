@@ -1,0 +1,26 @@
+.UserList {
+  position: absolute;
+  right: 10px;
+  width: calc(100vw - 15vw - 10px - 10px - 10px);
+  margin: 20px 0 60px 16vw;
+}
+
+input[type=search] {
+  width: 260px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  margin: 0 0 20px 0;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=search]:focus {
+  width: 100%;
+}
+
+.Error {
+  color: red;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

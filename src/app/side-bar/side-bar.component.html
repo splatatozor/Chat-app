@@ -1,9 +1,9 @@
 <!-- Sidebar -->
 <div class="w3-sidebar w3-bar-block">
   <div class="Container__Img">
-    <img src="../../assets/images/chat_logo.png">
+    <img class="Container__Img__Img" src="../../assets/images/chat_logo.png">
   </div>
-  <a class="w3-bar-item w3-button" *ngIf="toggle.isLog">Amis</a>
+  <a class="w3-bar-item w3-button" (click)="goTo(3)" *ngIf="toggle.isLog">Amis</a>
   <a (click)="goTo(2)" class="w3-bar-item w3-button" *ngIf="toggle.isLog">Chat</a>
   <a (click)="goTo(1)" class="w3-bar-item w3-button" *ngIf="toggle.isLog">Mon profil</a>
   <a class="w3-bar-item w3-button" (click)="logOut()" *ngIf="toggle.isLog">Déconnexion</a>

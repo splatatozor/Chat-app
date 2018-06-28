@@ -66,4 +66,8 @@ export class ApiService {
       token: token
     })
   }
+
+  public getUser(username: String, count: Number): Observable<Object> {
+    return this.http.get(this.url + "user/search?username" + username + "&id=" + count)
+  }
 }

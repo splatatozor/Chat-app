@@ -1,3 +1,10 @@
+.Container__InfoProfile {
+  position: absolute;
+  right: 10px;
+  width: calc(100vw - 15vw - 10px - 10px - 10px);
+  margin: 20px 0 60px 16vw;
+}
+
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 600px;

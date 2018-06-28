@@ -25,12 +25,14 @@ export class SideBarComponent implements OnInit {
       this.api.logOut(token).subscribe(res => {
         this.toggle.isLog = false;
         localStorage.removeItem("token");
+        this.toggle.isLogin = true
       });
     }
   }
 
   protected logIn() {
     this.toggle.isLog = true;
+    this.toggle.isProfile = true
     console.log("Connect");
   }
 
@@ -42,36 +44,36 @@ export class SideBarComponent implements OnInit {
     if (value === 1) {
       this.toggle.isProfile = true;
       this.toggle.isChat = false;
-      this.toggle.isEditProfile = false;
+      this.toggle.isUserList = false;
       this.toggle.isSignIn = false;
       this.toggle.isLogin = false;
     }
     if (value === 2) {
       this.toggle.isProfile = false;
       this.toggle.isChat = true;
-      this.toggle.isEditProfile = false;
+      this.toggle.isUserList = false;
       this.toggle.isSignIn = false;
       this.toggle.isLogin = false;
-      this.badWords.checkbadWords("nique ta mère");
+      this.badWords.checkbadWords("nique ta m");
     }
     if (value === 3) {
       this.toggle.isProfile = false;
       this.toggle.isChat = false;
-      this.toggle.isEditProfile = true;
+      this.toggle.isUserList = true;
       this.toggle.isSignIn = false;
       this.toggle.isLogin = false;
     }
     if (value === 4) {
       this.toggle.isProfile = false;
       this.toggle.isChat = false;
-      this.toggle.isEditProfile = false;
+      this.toggle.isUserList = false;
       this.toggle.isSignIn = true;
       this.toggle.isLogin = false;
     }
     if (value === 5) {
       this.toggle.isProfile = false;
       this.toggle.isChat = false;
-      this.toggle.isEditProfile = false;
+      this.toggle.isUserList = false;
       this.toggle.isSignIn = false;
       this.toggle.isLogin = true;
     }

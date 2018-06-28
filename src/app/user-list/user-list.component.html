@@ -1,0 +1,18 @@
+<div class="UserList">
+
+    <input  class="form-control mr-sm-2"
+            type="search"
+            placeholder="Recherche un utilisateur"
+            [(ngModel)]="searchValue"
+            name="searchValue"
+            aria-label="Search"
+            (ngModelChange)="searchUser($event)">
+
+    <div class="Error" *ngIf="errorSearch">
+        Aucun utilisateur ne correspond à ce nom
+    </div>
+    <div *ngIf="!errorSearch">
+        <app-user-card *ngFor="let user of users" [user]="user"></app-user-card>
+    </div>
+
+</div>

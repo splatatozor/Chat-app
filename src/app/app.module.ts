@@ -10,6 +10,8 @@ import { SignInComponent } from "./sign-in/sign-in.component";
 import { HttpClientModule } from "@angular/common/http";
 import { LoginComponent } from './login/login.component';
 import {WebSocketService} from "./web-socket.service";
+import { UserListComponent } from './user-list/user-list.component';
+import { UserCardComponent } from './user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import {WebSocketService} from "./web-socket.service";
     ChatComponent,
     ProfileComponent,
     SignInComponent,
-    LoginComponent
+    LoginComponent,
+    UserListComponent,
+    UserCardComponent
   ],
   imports: [BrowserModule, HttpClientModule, FormsModule],
   providers: [WebSocketService],
