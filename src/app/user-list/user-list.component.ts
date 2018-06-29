@@ -8,7 +8,8 @@ import { ApiService } from "../api.service";
 })
 export class UserListComponent implements OnInit {
   protected searchValue: String;
-  protected letterCount: number = 0;
+  protected searchIndex: number = 0;
+  protected resIndex: number = 0;
   protected errorSearch: Boolean = false;
   protected users:any;
 
@@ -17,20 +18,24 @@ export class UserListComponent implements OnInit {
   ngOnInit() {}
 
   protected searchUser(e) {
+    console.log(e);
     this.errorSearch = false;
     if (this.searchValue === "") {
       this.errorSearch = false
       return;
     }
-    this.letterCount = this.searchValue.length;
-    console.log(this.searchValue, this.letterCount);
-    this.api.getUser(this.searchValue, this.letterCount).subscribe(res => {
+    this.searchIndex++;
+    console.log(this.searchValue, this.searchIndex);
+    this.api.getUser(this.searchValue, this.searchIndex).subscribe(res => {
+      console.log(res);
       if (res["success"] === false && res["errCode"] === "request") {
         this.errorSearch = true;
+        console.log("err : " + res["errCode"])
       }
       if (res["success"] === true) {
         console.log(res);
-        this.users = res
+        if(res["id"] > this.resIndex)
+          this.users = res["users"]
       }
     });
   }

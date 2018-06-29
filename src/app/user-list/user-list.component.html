@@ -6,7 +6,7 @@
             [(ngModel)]="searchValue"
             name="searchValue"
             aria-label="Search"
-            (ngModelChange)="searchUser($event)">
+            (keyup)="searchUser($event)">
 
     <div class="Error" *ngIf="errorSearch">
         Aucun utilisateur ne correspond à ce nom
