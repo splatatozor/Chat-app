@@ -13,6 +13,8 @@ import { WebSocketService } from './web-socket.service';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { FriendCardComponent } from './friend-card/friend-card.component';
+import { DiscussionService } from './discussion.service';
+import { ChatMessageComponent } from './chat-message/chat-message.component';
 
 @NgModule({
   declarations: [
@@ -24,10 +26,11 @@ import { FriendCardComponent } from './friend-card/friend-card.component';
     LoginComponent,
     UserListComponent,
     UserCardComponent,
-    FriendCardComponent
+    FriendCardComponent,
+    ChatMessageComponent
   ],
   imports: [BrowserModule, HttpClientModule, FormsModule],
-  providers: [WebSocketService],
+  providers: [WebSocketService, DiscussionService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

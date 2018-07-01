@@ -1,6 +1,7 @@
 import { Component, OnInit, NgZone, Input } from "@angular/core";
 import { ApiService } from "../api.service";
 import { ToggleService } from "../toggle.service";
+import { DiscussionService } from "../discussion.service"
 
 @Component({
   selector: "app-profile",
@@ -8,7 +9,7 @@ import { ToggleService } from "../toggle.service";
   styleUrls: ["./profile.component.scss"]
 })
 export class ProfileComponent implements OnInit {
-  protected username: String;
+  protected username: string;
   protected fullName: String;
   protected birthDate: String;
   protected country: Number;
@@ -22,7 +23,7 @@ export class ProfileComponent implements OnInit {
   public isFriend: Boolean;
   public futureUsername: String;
 
-  constructor(private api: ApiService, private toggle: ToggleService, private zone: NgZone) {
+  constructor(private api: ApiService, private toggle: ToggleService, private zone: NgZone, private discussion: DiscussionService) {
     this.avatar = this.api.url + "user/avatar/" + this.username;
   }
 
@@ -119,7 +120,22 @@ export class ProfileComponent implements OnInit {
   }
 
   protected startConversation(){
+    this.api.getDiscussion(localStorage.getItem("username"), this.username, localStorage.getItem("token")).subscribe(res => {
+        console.log(res);
+        if(res.success) {
+            this.toggle.isProfile = false;
+            this.toggle.isChat = false;
+            this.toggle.isUserList = false;
+            this.toggle.isSignIn = false;
+            this.toggle.isLogin = false;
 
+            setTimeout(() => {
+                this.toggle.isChat = true;
+            }, 100);
+            this.discussion.activeDiscussion = this.username;
+            this.discussion.setDiscussion(this.username, res.discussion);
+        }
+    });
   }
 
   public getUser(username: String){

@@ -75,7 +75,11 @@ export class ApiService {
       return this.http.get(this.url + "user/" + username)
   }
 
-  public addFriend(token, username): Observable<object> {
+  public addFriend(token, username): Observable<Object> {
     return this.http.post(this.url + "user/friends/add", {token: token, username: username})
+  }
+
+  public getDiscussion(user1, user2, token): Observable<any> {
+      return this.http.get(this.url + "discussion?user1=" + user1 + "&user2=" + user2 + "&token=" + token)
   }
 }

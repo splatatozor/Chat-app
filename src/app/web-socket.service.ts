@@ -21,10 +21,6 @@ export class WebSocketService {
         this.socket.emit('custom_connect', {username: username, token: token});
     }
 
-    public send(message: String): void {
-        this.socket.emit('message', message);
-    }
-
     public getFriends(): void {
         this.socket.emit('getConnectedFriends');
     }
@@ -39,6 +35,16 @@ export class WebSocketService {
         return new Observable<String>(observer => {
             this.socket.on('stayAwake', () => observer.next());
         });
+    }
+
+    public onGetDiscussion(): Observable<any> {
+        return new Observable<Event>(observer => {
+            this.socket.on('getDiscussion', (data: any) => observer.next(data));
+        });
+    }
+
+    public sendDiscussionMessage(data){
+        this.socket.emit('addDiscussionMessage', data);
     }
 
     /*public onEvent(event: Event): Observable<any> {
