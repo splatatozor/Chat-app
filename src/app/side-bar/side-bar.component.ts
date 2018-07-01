@@ -3,19 +3,32 @@ import { ToggleService } from "../toggle.service";
 import { ApiService } from "../api.service";
 import { User } from "../user";
 import { BadWordsService } from "../bad-words.service";
+import { WebSocketService } from "../web-socket.service";
+import { ProfileComponent } from "../profile/profile.component"
 declare var require: any;
 
 @Component({
+  providers: [ProfileComponent],
   selector: "app-side-bar",
   templateUrl: "./side-bar.component.html",
   styleUrls: ["./side-bar.component.scss"]
 })
 export class SideBarComponent implements OnInit {
+  protected friends: any = [];
+  private username: string;
+
   constructor(
     public toggle: ToggleService,
     private api: ApiService,
-    private badWords: BadWordsService
-  ) {}
+    private badWords: BadWordsService,
+    private webSocket: WebSocketService,
+    private profileComponent: ProfileComponent
+  ) {
+    this.username = localStorage.getItem("username");
+    webSocket.onConnectedFriends().subscribe(res => {
+        this.friends.push(res);
+    });
+  }
 
   ngOnInit() {}
 
@@ -25,6 +38,7 @@ export class SideBarComponent implements OnInit {
       this.api.logOut(token).subscribe(res => {
         this.toggle.isLog = false;
         localStorage.removeItem("token");
+        localStorage.removeItem("username");
         this.toggle.isLogin = true
       });
     }
@@ -41,42 +55,38 @@ export class SideBarComponent implements OnInit {
   }
 
   protected goTo(value: Number) {
-    if (value === 1) {
-      this.toggle.isProfile = true;
+    if (this.webSocket.isInit) {
+      this.friends = [];
+      this.webSocket.getFriends();
+    }
+      this.toggle.isProfile = false;
       this.toggle.isChat = false;
       this.toggle.isUserList = false;
       this.toggle.isSignIn = false;
       this.toggle.isLogin = false;
+      //this.delay(3000);
+    if (value === 1) {
+      this.toggle.futureUsername = "";
+      setTimeout(() => {this.toggle.isProfile = true;}, 100);
+      console.log("yop");
     }
     if (value === 2) {
-      this.toggle.isProfile = false;
       this.toggle.isChat = true;
-      this.toggle.isUserList = false;
-      this.toggle.isSignIn = false;
-      this.toggle.isLogin = false;
       this.badWords.checkbadWords("nique ta m");
     }
     if (value === 3) {
-      this.toggle.isProfile = false;
-      this.toggle.isChat = false;
       this.toggle.isUserList = true;
-      this.toggle.isSignIn = false;
-      this.toggle.isLogin = false;
     }
     if (value === 4) {
-      this.toggle.isProfile = false;
-      this.toggle.isChat = false;
-      this.toggle.isUserList = false;
       this.toggle.isSignIn = true;
-      this.toggle.isLogin = false;
     }
     if (value === 5) {
-      this.toggle.isProfile = false;
-      this.toggle.isChat = false;
-      this.toggle.isUserList = false;
-      this.toggle.isSignIn = false;
       this.toggle.isLogin = true;
     }
     return;
+  }
+
+  async delay(ms: number){
+    await new Promise( resolve => setTimeout(resolve, ms));
   }
 }

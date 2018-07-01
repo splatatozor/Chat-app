@@ -9,7 +9,7 @@
            alt="{{username}}"
            class="Img"
            *ngIf="avatar">
-      <div class="image-upload">
+      <div *ngIf="isMe" class="image-upload">
         <label for="file-input">
           <img src="http://goo.gl/pB9rpQ"/>
         </label>
@@ -24,8 +24,10 @@
     <a href="#"><i class="fa fa-twitter"></i></a>
     <a href="#"><i class="fa fa-linkedin"></i></a>
     <a href="#"><i class="fa fa-facebook"></i></a>
+    <button *ngIf="!isMe && !isFriend" (click)="addFriend()">Add friend</button>
+    <button *ngIf="!isMe  && isFriend" (click)="startConversation()">Let's chat !</button>
     <button (click)="sendEmail()">Contact</button>
-    <div class="Delete" (click)="deleteAccount()">
+    <div *ngIf="isMe" class="Delete" (click)="deleteAccount()">
         Supprimer mon compte
     </div>
 
@@ -34,6 +36,9 @@
     </div>
     <div class="Error" *ngIf="errorType">
       L'image doit etre de type jpg, jpeg, png ou gif.
+    </div>
+    <div class="Error" *ngIf="errorFriend">
+      Vous avez déja invité cet amis.
     </div>
   </div>
 </div>

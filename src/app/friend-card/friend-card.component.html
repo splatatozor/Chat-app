@@ -1,0 +1,7 @@
+<div class="friend" (click)="goToProfile()">
+  <img [src]=getAvatar(friend.username) />
+  <p>
+    <strong>{{friend.username}}</strong>
+  </p>
+  <div [ngClass]='(friend.status) ? "status available" : "status away"'></div>
+</div>

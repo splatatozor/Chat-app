@@ -68,6 +68,14 @@ export class ApiService {
   }
 
   public getUser(username: String, count: Number): Observable<Object> {
-    return this.http.get(this.url + "user/search/" + username + "?id=" + count)
+      return this.http.get(this.url + "user/search/" + username + "?id=" + count)
+  }
+
+  public getOneUser(username: String): Observable<Object> {
+      return this.http.get(this.url + "user/" + username)
+  }
+
+  public addFriend(token, username): Observable<object> {
+    return this.http.post(this.url + "user/friends/add", {token: token, username: username})
   }
 }

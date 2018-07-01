@@ -12,6 +12,8 @@ export class ToggleService {
   public isLogin: Boolean = false;
 
   public token : string = "";
+  public futureUsername: string = "";
+  public friendProfile: boolean = false;
 
   constructor() { }
 }

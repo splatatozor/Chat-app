@@ -9,9 +9,10 @@ import { ProfileComponent } from "./profile/profile.component";
 import { SignInComponent } from "./sign-in/sign-in.component";
 import { HttpClientModule } from "@angular/common/http";
 import { LoginComponent } from './login/login.component';
-import {WebSocketService} from "./web-socket.service";
+import { WebSocketService } from './web-socket.service';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserCardComponent } from './user-card/user-card.component';
+import { FriendCardComponent } from './friend-card/friend-card.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UserCardComponent } from './user-card/user-card.component';
     SignInComponent,
     LoginComponent,
     UserListComponent,
-    UserCardComponent
+    UserCardComponent,
+    FriendCardComponent
   ],
   imports: [BrowserModule, HttpClientModule, FormsModule],
   providers: [WebSocketService],

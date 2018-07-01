@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     private webSocket: WebSocketService
   ) {
     // Uncomment this to active socket
-      //this.webSocket.initSocket()
+      this.webSocket.initSocket();
   }
 
   ngOnInit() {

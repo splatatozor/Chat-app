@@ -3,29 +3,47 @@ import { Observable } from 'rxjs/Observable';
 
 import * as socketIo from 'socket.io-client';
 
-const SERVER_URL = 'http://localhost:8080';
+const SERVER_URL = ':3000';
 
 @Injectable()
 export class WebSocketService {
     private socket;
+    public isInit = false;
 
     public initSocket(): void {
-        this.socket = socketIo(SERVER_URL);
+        if (!this.isInit) {
+            this.socket = socketIo(SERVER_URL);
+            this.isInit = true;
+        }
+    }
+
+    public connect(username, token): void {
+        this.socket.emit('custom_connect', {username: username, token: token});
     }
 
     public send(message: String): void {
         this.socket.emit('message', message);
     }
 
-    public onMessage(): Observable<String> {
+    public getFriends(): void {
+        this.socket.emit('getConnectedFriends');
+    }
+
+    public onConnectedFriends(): Observable<String> {
         return new Observable<String>(observer => {
-            this.socket.on('stayAwake', (data: String) => observer.next(data));
+            this.socket.on('connectedFriends', (data: String) => observer.next(data));
         });
     }
 
-    public onEvent(event: Event): Observable<any> {
+    public onStayAwake(): Observable<String> {
+        return new Observable<String>(observer => {
+            this.socket.on('stayAwake', () => observer.next());
+        });
+    }
+
+    /*public onEvent(event: Event): Observable<any> {
         return new Observable<Event>(observer => {
             this.socket.on(event, () => observer.next());
         });
-    }
+    }*/
 }

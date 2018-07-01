@@ -1,5 +1,5 @@
-<div class="friend">
-  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg" />
+<div (click)="goToProfile()" class="user">
+  <img [src]=getAvatar(user.username) />
   <p>
     <strong>{{user.username}}</strong>
     <br>

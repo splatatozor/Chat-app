@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, NgZone, Input } from "@angular/core";
 import { ApiService } from "../api.service";
 import { ToggleService } from "../toggle.service";
 
@@ -16,22 +16,36 @@ export class ProfileComponent implements OnInit {
   protected avatar: String;
   protected errorSize: Boolean = false;
   protected errorType: Boolean = false;
+  protected errorFriend: Boolean = false;
 
-  constructor(private api: ApiService, private toggle: ToggleService) {
+  public isMe: Boolean;
+  public isFriend: Boolean;
+  public futureUsername: String;
+
+  constructor(private api: ApiService, private toggle: ToggleService, private zone: NgZone) {
     this.avatar = this.api.url + "user/avatar/" + this.username;
   }
 
   ngOnInit() {
-    this.getMe();
+      this.isFriend = this.toggle.friendProfile;
+      if(this.toggle.futureUsername === "") {
+        this.getMe();
+        console.log("it's me");
+    }
+    else {
+      this.getUser(this.toggle.futureUsername);
+        console.log("it's another");
+    }
   }
 
   protected sendEmail(): void {
     window.open("mailto:" + this.mailAddress);
   }
 
-  protected getMe(): void {
+  public getMe(): void {
     this.api.getMe(this.toggle.token).subscribe(
       res => {
+        this.isMe = true;
         this.username = res["username"];
         this.fullName = res["fullName"];
         this.birthDate = res["birthDate"];
@@ -43,6 +57,7 @@ export class ProfileComponent implements OnInit {
           res["username"] +
           "?time=" +
           Date.now();
+        this.isMe = true;
       },
       error => {
         console.log(error);
@@ -95,5 +110,43 @@ export class ProfileComponent implements OnInit {
       this.toggle.isLogin = true;
       localStorage.removeItem("token");
     });
+  }
+
+  protected addFriend(){
+    this.api.addFriend(localStorage.getItem("token"), this.username).subscribe(res => {
+
+    })
+  }
+
+  protected startConversation(){
+
+  }
+
+  public getUser(username: String){
+      this.api.getOneUser(username).subscribe(
+          res => {
+            console.log(res);
+            console.log(this.username);
+            this.zone.run(() => {
+                this.isMe = false;
+                this.username = res["username"];
+                this.fullName = res["fullName"];
+                this.birthDate = res["birthDate"];
+                this.country = res["country"];
+                this.mailAddress = res["mailAddress"];
+                this.avatar =
+                    this.api.url +
+                    "user/avatar/" +
+                    res["username"] +
+                    "?time=" +
+                    Date.now();
+
+                this.isMe = false;
+            });
+          },
+          error => {
+              console.log(error);
+          }
+      );
   }
 }
