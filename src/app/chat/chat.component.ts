@@ -18,6 +18,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+      this.refreshMessages()
       this.discussion.change.subscribe(res => {
           if(res === this.discussion.activeDiscussion){
               this.refreshMessages()
