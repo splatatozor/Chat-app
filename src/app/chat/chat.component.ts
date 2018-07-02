@@ -14,16 +14,15 @@ export class ChatComponent implements OnInit {
   constructor(
     private webSocket: WebSocketService,
     private discussion: DiscussionService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
-      this.refreshMessages()
-      this.discussion.change.subscribe(res => {
-          if(res === this.discussion.activeDiscussion){
-              this.refreshMessages()
-          }
-      })
+    this.refreshMessages();
+    this.discussion.change.subscribe(res => {
+      if (res === this.discussion.activeDiscussion) {
+        this.refreshMessages();
+      }
+    });
   }
 
   private refreshMessages() {
@@ -34,12 +33,12 @@ export class ChatComponent implements OnInit {
   }
 
   protected sendMessage() {
-      this.message = "";
     this.webSocket.sendDiscussionMessage({
       user1: localStorage.getItem("username"),
       user2: this.discussion.activeDiscussion,
       token: localStorage.getItem("token"),
       message: this.message
     });
+    this.message = "";
   }
 }
