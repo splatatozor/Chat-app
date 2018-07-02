@@ -31,6 +31,9 @@ export class ChatComponent implements OnInit {
     this.messages = this.discussion.getDiscussion(
       this.discussion.activeDiscussion
     );
+    setTimeout(function () {
+      window.scrollTo(0, 10000000);
+    }, 500);
   }
 
   protected sendMessage() {

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import * as socketIo from 'socket.io-client';
@@ -9,6 +9,7 @@ const SERVER_URL = '192.168.1.188:3000';
 export class WebSocketService {
     private socket;
     public isInit = false;
+    public hasChanged = false;
 
     public initSocket(): void {
         if (!this.isInit) {
@@ -25,8 +26,8 @@ export class WebSocketService {
         this.socket.emit('getConnectedFriends');
     }
 
-    public onConnectedFriends(): Observable<String> {
-        return new Observable<String>(observer => {
+    public onConnectedFriends(): Observable<any> {
+        return new Observable<any>(observer => {
             this.socket.on('connectedFriends', (data: String) => observer.next(data));
         });
     }

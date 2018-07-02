@@ -15,6 +15,9 @@ export class ChatMessageComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit() {
+    var tmpSplit = this.message.date.split('T');
+    var tmpTime = tmpSplit[1].split('.')[0];
+    this.message.date = tmpSplit[0] + ' ' + tmpTime;
     if(this.message.user === localStorage.getItem('username')){
       this.isMe = true;
     }

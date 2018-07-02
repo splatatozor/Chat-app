@@ -26,7 +26,13 @@ export class SideBarComponent implements OnInit {
   ) {
     this.username = localStorage.getItem("username");
     webSocket.onConnectedFriends().subscribe(res => {
-      this.friends.push(res);
+        let friendIndex = this.friends.indexOf(res);
+        if(friendIndex >= 0) {
+            this.friends[friendIndex].status = res.status;
+        }
+        else {
+            this.friends.push(res);
+        }
     });
   }
 
