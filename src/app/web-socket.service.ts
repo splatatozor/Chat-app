@@ -48,6 +48,10 @@ export class WebSocketService {
         this.socket.emit('addDiscussionMessage', data);
     }
 
+    public close(){
+        this.socket.close();
+    }
+
     /*public onEvent(event: Event): Observable<any> {
         return new Observable<Event>(observer => {
             this.socket.on(event, () => observer.next());

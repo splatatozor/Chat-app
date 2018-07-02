@@ -46,6 +46,7 @@ export class SideBarComponent implements OnInit {
         localStorage.removeItem("token");
         localStorage.removeItem("username");
         this.toggle.isLogin = true;
+        this.webSocket.close();
       });
     }
   }
