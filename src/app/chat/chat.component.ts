@@ -10,11 +10,14 @@ import { DiscussionService } from "../discussion.service";
 export class ChatComponent implements OnInit {
   private messages = [];
   protected message: string;
+  private scrollingElement: any;
 
   constructor(
     private webSocket: WebSocketService,
     private discussion: DiscussionService
-  ) {}
+  ) {
+    this.scrollingElement = document.scrollingElement || document.body;
+  }
 
   ngOnInit() {
     this.refreshMessages();
@@ -29,7 +32,6 @@ export class ChatComponent implements OnInit {
     this.messages = this.discussion.getDiscussion(
       this.discussion.activeDiscussion
     );
-    console.log(this.messages);
   }
 
   protected sendMessage() {

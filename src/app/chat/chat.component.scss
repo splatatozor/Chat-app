@@ -5,7 +5,7 @@
   position: absolute;
   right: 10px;
   width: calc(100vw - 15vw - 10px - 10px - 10px);
-  margin: 20px 0 60px 16vw;
+  margin: 20px 0 70px 16vw;
 }
 
 /* Style time text */
@@ -21,11 +21,8 @@
 }
 
 .textarea {
-  position: fixed;
   border: 1px solid cadetblue;
   width: calc(100vw - 15vw - 10px - 10px - 10px);
-  bottom: 0;
-  right: 10px;
   height: 50px;
   z-index: 99;
   background: #fafafa;
@@ -39,6 +36,9 @@
 }
 
 .button {
+  position: absolute;
+  right: 10px;
+  bottom: 17px;
   display: inline-block;
   padding: 0 25px;
   font-size: 24px;
@@ -51,9 +51,6 @@
   border: none;
   border-radius: 15px;
   box-shadow: 0 3px 5px #999;
-  position: fixed;
-  bottom: 17px;
-  right: 20px;
   z-index: 100;
 }
 
