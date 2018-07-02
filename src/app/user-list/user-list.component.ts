@@ -22,6 +22,7 @@ export class UserListComponent implements OnInit {
     this.errorSearch = false;
     if (this.searchValue === "") {
       this.errorSearch = false
+        this.users = []
       return;
     }
     this.searchIndex++;

@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone, Input } from "@angular/core";
 import { ApiService } from "../api.service";
 import { ToggleService } from "../toggle.service";
-import { DiscussionService } from "../discussion.service"
+import { DiscussionService } from "../discussion.service";
 
 @Component({
   selector: "app-profile",
@@ -22,20 +22,25 @@ export class ProfileComponent implements OnInit {
   public isMe: Boolean;
   public isFriend: Boolean;
   public futureUsername: String;
+  private friendAdded: Boolean = false;
 
-  constructor(private api: ApiService, private toggle: ToggleService, private zone: NgZone, private discussion: DiscussionService) {
+  constructor(
+    private api: ApiService,
+    private toggle: ToggleService,
+    private zone: NgZone,
+    private discussion: DiscussionService
+  ) {
     this.avatar = this.api.url + "user/avatar/" + this.username;
   }
 
   ngOnInit() {
-      this.isFriend = this.toggle.friendProfile;
-      if(this.toggle.futureUsername === "") {
-        this.getMe();
-        console.log("it's me");
-    }
-    else {
+    this.isFriend = this.toggle.friendProfile;
+    if (this.toggle.futureUsername === "") {
+      this.getMe();
+      console.log("it's me");
+    } else {
       this.getUser(this.toggle.futureUsername);
-        console.log("it's another");
+      console.log("it's another");
     }
   }
 
@@ -105,7 +110,6 @@ export class ProfileComponent implements OnInit {
 
   protected deleteAccount() {
     this.api.deleteAccount(this.toggle.token).subscribe(res => {
-      console.log("ok");
       this.toggle.isLog = false;
       this.toggle.isProfile = false;
       this.toggle.isLogin = true;
@@ -113,56 +117,85 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  protected addFriend(){
-    this.api.addFriend(localStorage.getItem("token"), this.username).subscribe(res => {
-
-    })
-  }
-
-  protected startConversation(){
-    this.api.getDiscussion(localStorage.getItem("username"), this.username, localStorage.getItem("token")).subscribe(res => {
-        console.log(res);
-        if(res.success) {
-            this.toggle.isProfile = false;
-            this.toggle.isChat = false;
-            this.toggle.isUserList = false;
-            this.toggle.isSignIn = false;
-            this.toggle.isLogin = false;
-
-            setTimeout(() => {
-                this.toggle.isChat = true;
-            }, 100);
-            this.discussion.activeDiscussion = this.username;
-            this.discussion.setDiscussion(this.username, res.discussion);
+  protected addFriend() {
+    this.api
+      .addFriend(localStorage.getItem("token"), this.username)
+      .subscribe(res => {
+        if (res["success"] === true) {
+          this.friendAdded = true;
+          this.displaySnackBar()
+        } else {
+          this.errorFriend = true;
         }
-    });
+      });
   }
 
-  public getUser(username: String){
-      this.api.getOneUser(username).subscribe(
-          res => {
-            console.log(res);
-            console.log(this.username);
-            this.zone.run(() => {
-                this.isMe = false;
-                this.username = res["username"];
-                this.fullName = res["fullName"];
-                this.birthDate = res["birthDate"];
-                this.country = res["country"];
-                this.mailAddress = res["mailAddress"];
-                this.avatar =
-                    this.api.url +
-                    "user/avatar/" +
-                    res["username"] +
-                    "?time=" +
-                    Date.now();
+  protected displayAdd(): Boolean {
+      return !this.isMe && !this.isFriend && !this.friendAdded
+  }
 
-                this.isMe = false;
-            });
-          },
-          error => {
-              console.log(error);
-          }
-      );
+  private displaySnackBar() {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar");
+
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function() {
+      x.className = x.className.replace("show", "");
+    }, 3000);
+  }
+
+  protected startConversation() {
+    this.api
+      .getDiscussion(
+        localStorage.getItem("username"),
+        this.username,
+        localStorage.getItem("token")
+      )
+      .subscribe(res => {
+        if (res.success) {
+          this.toggle.isProfile = false;
+          this.toggle.isChat = false;
+          this.toggle.isUserList = false;
+          this.toggle.isSignIn = false;
+          this.toggle.isLogin = false;
+
+          setTimeout(() => {
+            this.toggle.isChat = true;
+          }, 100);
+          this.discussion.activeDiscussion = this.username;
+          this.discussion.setDiscussion(this.username, res.discussion);
+        }
+      });
+  }
+
+  public getUser(username: String) {
+    this.api.getOneUser(username).subscribe(
+      res => {
+        console.log(res);
+        console.log(this.username);
+        this.zone.run(() => {
+          this.isMe = false;
+          this.username = res["username"];
+          this.fullName = res["fullName"];
+          this.birthDate = res["birthDate"];
+          this.country = res["country"];
+          this.mailAddress = res["mailAddress"];
+          this.avatar =
+            this.api.url +
+            "user/avatar/" +
+            res["username"] +
+            "?time=" +
+            Date.now();
+
+          this.isMe = false;
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

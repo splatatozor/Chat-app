@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class DiscussionService {
   private discussions = {};
-  public activeDiscussion = '';
+  public activeDiscussion = "";
+  public hasNewMessage: Boolean = false;
 
-  constructor() { }
+  constructor() {}
 
   public getDiscussion(user: string) {
     return this.discussions[user];
