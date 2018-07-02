@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
     // Uncomment this to active socket
       this.webSocket.initSocket();
       this.webSocket.onGetDiscussion().subscribe(res => {
-        this.discussion.hasNewMessage = false;
         if(res.success){
           discussion.setDiscussion(res.user, res.discussion);
         }
