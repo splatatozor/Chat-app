@@ -1,5 +1,5 @@
 <div [ngClass]='(isMe) ? "Container__Chat__Message" : "Container__Chat__Message darker"'>
-    <img [src]="getAvatar(message.username)" alt="Avatar" [ngClass]='(isMe) ? "" : "right"'>
+    <img [src]="getAvatar(message.user)" alt="Avatar" [ngClass]='(isMe) ? "" : "right"'>
     <p [ngClass]='(isMe) ? "" : "Container__Chat__Message--Text"'>{{message.message}}</p>
     <span [ngClass]='(isMe) ? "time-left" : "time-right"' class="time-left">{{message.date}}</span>
 </div>
