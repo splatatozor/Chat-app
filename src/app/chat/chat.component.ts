@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { WebSocketService } from "../web-socket.service";
 import { DiscussionService } from "../discussion.service";
+import { ToggleService } from "../toggle.service";
 
 @Component({
   selector: "app-chat",
@@ -10,14 +11,12 @@ import { DiscussionService } from "../discussion.service";
 export class ChatComponent implements OnInit {
   private messages = [];
   protected message: string;
-  private scrollingElement: any;
 
   constructor(
     private webSocket: WebSocketService,
-    private discussion: DiscussionService
-  ) {
-    this.scrollingElement = document.scrollingElement || document.body;
-  }
+    private discussion: DiscussionService,
+    protected toggle: ToggleService
+  ) {}
 
   ngOnInit() {
     this.refreshMessages();
