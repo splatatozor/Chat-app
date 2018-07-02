@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { WebSocketService } from "../web-socket.service";
 import { DiscussionService } from "../discussion.service";
 
@@ -10,19 +10,19 @@ import { DiscussionService } from "../discussion.service";
 export class ChatComponent implements OnInit {
   private messages = [];
   protected message: string;
-  protected timeout: any;
 
   constructor(
     private webSocket: WebSocketService,
     private discussion: DiscussionService
   ) {
-    if (this.discussion.hasNewMessage === true) {
-      this.ngOnInit();
-    }
   }
 
   ngOnInit() {
-    this.timeout = setTimeout(this.refreshMessages(), 1000);
+      this.discussion.change.subscribe(res => {
+          if(res === this.discussion.activeDiscussion){
+              this.refreshMessages()
+          }
+      })
   }
 
   private refreshMessages() {
@@ -32,12 +32,8 @@ export class ChatComponent implements OnInit {
     console.log(this.messages);
   }
 
-  ngOnDestroy() {
-    console.log("exited");
-    clearTimeout(this.timeout);
-  }
-
   protected sendMessage() {
+      this.message = "";
     this.webSocket.sendDiscussionMessage({
       user1: localStorage.getItem("username"),
       user2: this.discussion.activeDiscussion,

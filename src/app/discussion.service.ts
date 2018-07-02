@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Output, EventEmitter } from "@angular/core";
 
 @Injectable({
   providedIn: "root"
@@ -6,7 +6,8 @@ import { Injectable } from "@angular/core";
 export class DiscussionService {
   private discussions = {};
   public activeDiscussion = "";
-  public hasNewMessage: Boolean = false;
+
+  @Output() change: EventEmitter<string> = new EventEmitter();
 
   constructor() {}
 
@@ -16,5 +17,6 @@ export class DiscussionService {
 
   public setDiscussion(user: string, messages: any) {
     this.discussions[user] = messages;
+    this.change.emit(user)
   }
 }

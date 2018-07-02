@@ -4,7 +4,7 @@ import { ApiService } from "../api.service";
 import { User } from "../user";
 import { BadWordsService } from "../bad-words.service";
 import { WebSocketService } from "../web-socket.service";
-import { ProfileComponent } from "../profile/profile.component"
+import { ProfileComponent } from "../profile/profile.component";
 declare var require: any;
 
 @Component({
@@ -26,7 +26,7 @@ export class SideBarComponent implements OnInit {
   ) {
     this.username = localStorage.getItem("username");
     webSocket.onConnectedFriends().subscribe(res => {
-        this.friends.push(res);
+      this.friends.push(res);
     });
   }
 
@@ -39,14 +39,14 @@ export class SideBarComponent implements OnInit {
         this.toggle.isLog = false;
         localStorage.removeItem("token");
         localStorage.removeItem("username");
-        this.toggle.isLogin = true
+        this.toggle.isLogin = true;
       });
     }
   }
 
   protected logIn() {
     this.toggle.isLog = true;
-    this.toggle.isProfile = true
+    this.toggle.isProfile = true;
     console.log("Connect");
   }
 
@@ -59,15 +59,17 @@ export class SideBarComponent implements OnInit {
       this.friends = [];
       this.webSocket.getFriends();
     }
-      this.toggle.isProfile = false;
-      this.toggle.isChat = false;
-      this.toggle.isUserList = false;
-      this.toggle.isSignIn = false;
-      this.toggle.isLogin = false;
-      //this.delay(3000);
+    this.toggle.isProfile = false;
+    this.toggle.isChat = false;
+    this.toggle.isUserList = false;
+    this.toggle.isSignIn = false;
+    this.toggle.isLogin = false;
+    //this.delay(3000);
     if (value === 1) {
       this.toggle.futureUsername = "";
-      setTimeout(() => {this.toggle.isProfile = true;}, 100);
+      setTimeout(() => {
+        this.toggle.isProfile = true;
+      }, 100);
       console.log("yop");
     }
     if (value === 2) {
@@ -86,7 +88,7 @@ export class SideBarComponent implements OnInit {
     return;
   }
 
-  async delay(ms: number){
-    await new Promise( resolve => setTimeout(resolve, ms));
+  async delay(ms: number) {
+    await new Promise(resolve => setTimeout(resolve, ms));
   }
 }

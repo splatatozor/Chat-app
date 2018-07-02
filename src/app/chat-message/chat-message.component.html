@@ -1,17 +1,5 @@
-<div [ngClass]='(isMe) ? "Container__Chat__Message" : "Container__Chat__Message darker"'>
-    <img [src]="getAvatar(message.user)" alt="Avatar" [ngClass]='(isMe) ? "" : "right"'>
-    <p [ngClass]='(isMe) ? "" : "Container__Chat__Message--Text"'>{{message.message}}</p>
-    <span [ngClass]='(isMe) ? "time-left" : "time-right"' class="time-left">{{message.date}}</span>
+<div [ngClass]='(!isMe) ? "Container__Chat__Message" : "Container__Chat__Message darker"'>
+    <img [src]="getAvatar(message.user)" alt="Avatar" [ngClass]='(!isMe) ? "" : "right"'>
+    <p [ngClass]='(!isMe) ? "" : "Container__Chat__Message--Text"'>{{message.message}}</p>
+    <span [ngClass]='(!isMe) ? "time-left" : "time-right"' class="time-left">{{message.date}}</span>
 </div>
-
-<!--<div class="Container__Chat__Message">-->
-    <!--<img src="../../assets/images/avatar2.png" alt="Avatar">-->
-    <!--<p>Hello. How are you today?</p>-->
-    <!--<span class="time-left">11:00</span>-->
-<!--</div>-->
-
-<!--<div class="Container__Chat__Message darker">-->
-    <!--<img src="../../assets/images/avatar.png" alt="Avatar" class="right">-->
-    <!--<p class="Container__Chat__Message&#45;&#45;Text">Hey im fine thanks ! </p>-->
-    <!--<span class="time-right">11:01</span>-->
-<!--</div>-->

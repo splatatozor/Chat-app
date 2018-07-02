@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
         this.discussion.hasNewMessage = false;
         if(res.success){
           discussion.setDiscussion(res.user, res.discussion);
-          this.discussion.hasNewMessage = true
         }
       });
   }
