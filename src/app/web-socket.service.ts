@@ -49,7 +49,7 @@ export class WebSocketService {
     }
 
     public close(){
-        this.socket.close();
+        this.socket.emit('disconnect');
     }
 
     /*public onEvent(event: Event): Observable<any> {
