@@ -5,6 +5,7 @@ import { User } from "../user";
 import { BadWordsService } from "../bad-words.service";
 import { WebSocketService } from "../web-socket.service";
 import { ProfileComponent } from "../profile/profile.component";
+import { DiscussionService } from "../discussion.service"
 declare var require: any;
 
 @Component({
@@ -22,7 +23,8 @@ export class SideBarComponent implements OnInit {
     private api: ApiService,
     private badWords: BadWordsService,
     private webSocket: WebSocketService,
-    private profileComponent: ProfileComponent
+    private profileComponent: ProfileComponent,
+    private discussion: DiscussionService
   ) {
     this.username = localStorage.getItem("username");
     webSocket.onConnectedFriends().subscribe(res => {
@@ -45,7 +47,10 @@ export class SideBarComponent implements OnInit {
         this.toggle.isLog = false;
         localStorage.removeItem("token");
         localStorage.removeItem("username");
+        this.toggle.closeAll();
         this.toggle.isLogin = true;
+        this.discussion.clear();
+        this.friends = [];
         this.webSocket.close();
       });
     }

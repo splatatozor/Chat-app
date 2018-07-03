@@ -2,8 +2,8 @@
 <div class="Container__Chat" *ngIf="toggle.isChat">
   <app-chat-message *ngFor="let message of messages" [message]="message"></app-chat-message>
 
-  <input class="textarea" [(ngModel)]="message" type="text" placeholder="Type here!"/><div class="emojis"></div>
-  <button class="button" (click)="sendMessage()">Send</button>
+  <input class="textarea" [(ngModel)]="message" type="text" placeholder="Type here!" (keyup)="sendMessage($event)"/><div class="emojis"></div>
+  <button class="button" (click)="sendMessage(null)" >Send</button>
 </div>
 
 

@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.isFriend = this.toggle.friendProfile;
-    if (this.toggle.futureUsername === "") {
+    if (this.toggle.futureUsername === "" || this.toggle.futureUsername === localStorage.getItem('username')) {
       this.getMe();
       console.log("it's me");
     } else {

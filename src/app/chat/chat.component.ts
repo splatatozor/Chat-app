@@ -28,21 +28,27 @@ export class ChatComponent implements OnInit {
   }
 
   private refreshMessages() {
-    this.messages = this.discussion.getDiscussion(
-      this.discussion.activeDiscussion
-    );
-    setTimeout(function () {
-      window.scrollTo(0, 10000000);
-    }, 500);
+      if(this.discussion.activeDiscussion !== "") {
+          this.messages = this.discussion.getDiscussion(
+              this.discussion.activeDiscussion
+          );
+          setTimeout(function () {
+              window.scrollTo(0, 10000000);
+          }, 500);
+      }
   }
 
-  protected sendMessage() {
-    this.webSocket.sendDiscussionMessage({
-      user1: localStorage.getItem("username"),
-      user2: this.discussion.activeDiscussion,
-      token: localStorage.getItem("token"),
-      message: this.message
-    });
-    this.message = "";
+  protected sendMessage(ev) {
+      if (ev === null || ev.keyCode === 13) {
+          if (this.message !== "") {
+              this.webSocket.sendDiscussionMessage({
+                  user1: localStorage.getItem("username"),
+                  user2: this.discussion.activeDiscussion,
+                  token: localStorage.getItem("token"),
+                  message: this.message
+              });
+              this.message = "";
+          }
+      }
   }
 }

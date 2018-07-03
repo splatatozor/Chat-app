@@ -26,7 +26,7 @@
     <a href="#"><i class="fa fa-facebook"></i></a>
     <button *ngIf="displayAdd()" (click)="addFriend()">Add friend</button>
     <button *ngIf="!isMe  && isFriend" (click)="startConversation()">Let's chat !</button>
-    <button (click)="sendEmail()">Contact</button>
+    <button *ngIf="!isMe" (click)="sendEmail()">Contact</button>
     <div *ngIf="isMe" class="Delete" (click)="deleteAccount()">
         Supprimer mon compte
     </div>

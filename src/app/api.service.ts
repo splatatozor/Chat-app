@@ -6,8 +6,8 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class ApiService {
-  //public readonly url: string = "http://127.0.0.1:3000/";
-  public readonly url: string = "http://192.168.1.188:3000/";
+  public readonly url: string = "http://127.0.0.1:3000/";
+  //public readonly url: string = "http://192.168.1.188:3000/";
   constructor(private http: HttpClient) {}
 
   public addUser(

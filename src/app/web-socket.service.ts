@@ -3,7 +3,8 @@ import { Observable } from 'rxjs/Observable';
 
 import * as socketIo from 'socket.io-client';
 
-const SERVER_URL = '192.168.1.188:3000';
+const SERVER_URL = ':3000';
+//const SERVER_URL = '192.168.1.188:3000';
 
 @Injectable()
 export class WebSocketService {

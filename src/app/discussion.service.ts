@@ -17,6 +17,11 @@ export class DiscussionService {
 
   public setDiscussion(user: string, messages: any) {
     this.discussions[user] = messages;
-    this.change.emit(user)
+    this.change.emit(user);
+  }
+
+  public clear(){
+    this.discussions = {};
+    this.activeDiscussion = "";
   }
 }
