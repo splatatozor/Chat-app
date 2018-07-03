@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import { ApiService } from "../api.service"
+import { BadWordsService } from "../bad-words.service"
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,7 +13,7 @@ export class ChatMessageComponent implements OnInit {
   @Input() private message: any;
   private isMe = false;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private badWords: BadWordsService) { }
 
   ngOnInit() {
     var tmpSplit = this.message.date.split('T');
@@ -21,6 +22,7 @@ export class ChatMessageComponent implements OnInit {
     if(this.message.user === localStorage.getItem('username')){
       this.isMe = true;
     }
+    this.message.message = this.badWords.checkbadWords(this.message.message);
   }
 
   protected getAvatar(username) {

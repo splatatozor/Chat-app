@@ -17,7 +17,7 @@ export class BadWordsService {
   }
 
   public checkbadWords(text) {
-    console.log(this.filter.clean(text));
+    return this.filter.clean(text);
   }
 
   public getJSON() {
